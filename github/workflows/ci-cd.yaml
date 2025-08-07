@@ -1,0 +1,73 @@
+name: Sui Faucet Backend Deployment
+
+on: 
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci 
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to VPS
+        run: |
+          # Install sshpass if not available
+          sudo apt-get update && sudo apt-get install -y sshpass
+          
+          # Deploy using SSH
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "${{ secrets.SSH_USER }}@${{ secrets.DROPLET_IP }}" << EOF
+            set -e  # Exit on any error
+            
+            echo "Starting deployment..."
+            
+            # Configure git with GitHub token for authentication
+            git config --global credential.helper store
+            echo "https://${{ secrets.GIT_TOKEN }}:x-oauth-basic@github.com" > ~/.git-credentials
+            
+            # Navigate to project directory
+            cd /root/edge || {
+              echo "Error: Could not navigate to /root/edge"
+              exit 1
+            }
+            
+            # Pull latest changes with authentication
+            echo "Pulling latest changes..."
+            git pull origin main
+            
+            # Install dependencies
+            echo "Installing dependencies..."
+            npm install --save --force
+            
+            # Build the application
+            echo "Building application..."
+            npm run build
+            
+            # Stop existing PM2 process if running
+            echo "Stopping existing PM2 process..."
+            pm2 delete edge || true
+            
+            # Start the application with PM2
+            echo "Starting application with PM2..."
+            pm2 start "node ./dist/server.js" --name=edge
+            
+            # Save PM2 configuration
+            pm2 save
+            
+            echo "Deployment completed successfully!"
+          EOF
