@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Copy, Check, AlertCircle, Droplets, Wallet, Clock, Shield, Zap, ExternalLink, RefreshCw } from 'lucide-react';
 import { useAirdropMutation } from './api/mutations';
 import { RequestStatus } from './enum/request-status.enum';
@@ -152,7 +152,7 @@ const SuiFaucetDApp = () => {
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <Droplets className="w-6 h-6 text-white" />
               </div>
-              <div>
+              <div className="sm:flex flex-col hidden">
                 <h1 className="text-xl font-bold text-white">Sui Testnet Faucet</h1>
                 <p className="text-xs text-slate-400">Get free testnet tokens</p>
               </div>

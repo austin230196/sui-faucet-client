@@ -1,4 +1,4 @@
-name: Sui Faucet Backend Deployment
+name: Sui Faucet Frontend Deployment
 
 on: 
   push:
@@ -37,12 +37,12 @@ jobs:
             echo "Starting deployment..."
             
             # Configure git with GitHub token for authentication
-            git config --global credential.helper store
-            echo "https://${{ secrets.GIT_TOKEN }}:x-oauth-basic@github.com" > ~/.git-credentials
+            # git config --global credential.helper store
+            # echo "https://${{ secrets.GIT_TOKEN }}:x-oauth-basic@github.com" > ~/.git-credentials
             
             # Navigate to project directory
-            cd /root/edge || {
-              echo "Error: Could not navigate to /root/edge"
+            cd /var/www/html/faucet || {
+              echo "Error: Could not navigate to /var/www/html/faucet"
               exit 1
             }
             
@@ -59,15 +59,19 @@ jobs:
             npm run build
             
             # Stop existing PM2 process if running
-            echo "Stopping existing PM2 process..."
-            pm2 delete edge || true
+            # echo "Stopping existing PM2 process..."
+            # pm2 delete edge || true
             
             # Start the application with PM2
-            echo "Starting application with PM2..."
-            pm2 start "node ./dist/server.js" --name=edge
+            # echo "Starting application with PM2..."
+            # pm2 start "node ./dist/server.js" --name=edge
             
             # Save PM2 configuration
-            pm2 save
+            # pm2 save
             
             echo "Deployment completed successfully!"
+
+            echo "Restarting Nginx"
+            sudo systemctl restart nginx
+            echo "Nginx restarted successfully!"
           EOF
