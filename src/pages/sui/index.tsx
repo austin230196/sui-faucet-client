@@ -337,7 +337,7 @@ const SuiFaucetDApp = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <span className="font-mono text-sm text-slate-300">
-                            {tx.address.substring(0, 8)}...{tx.address.substring(tx.address.length - 6)}
+                            {tx?.address?.substring(0, 8)}...{tx.address?.substring(tx.address?.length - 6)}
                           </span>
                           <button
                             onClick={() => copyToClipboard(tx.address)}
