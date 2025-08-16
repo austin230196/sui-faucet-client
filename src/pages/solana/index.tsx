@@ -313,7 +313,7 @@ const SolanaFaucetDApp = () => {
               </div>
 
               {/* Wallet Address Input */}
-              <div className="mb-10">
+              <div className="mb-4">
                 <label className="block text-sm font-semibold text-gray-300 mb-3">
                   Wallet Address
                 </label>
