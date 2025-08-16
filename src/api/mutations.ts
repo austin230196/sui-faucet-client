@@ -1,12 +1,20 @@
 import {useMutation} from "@tanstack/react-query";
-import { requestAirdrop } from "./api";
+import { requestAirdrop, requestSolanaAirdrop } from "./api";
+import type { Network } from "../enum/network.enum";
 
 
 
 
-export const useAirdropMutation = () => {
+export const useSuiAirdropMutation = () => {
     return useMutation({
-        mutationKey: ["airdrop"],
+        mutationKey: ["sui-airdrop"],
         mutationFn: (data: {address: string, amount: number}) => requestAirdrop(data.address, data.amount)
+    })
+}
+
+export const useSolanaAirdropMutation = () => {
+    return useMutation({
+        mutationKey: ["solana-airdrop"],
+        mutationFn: (data: {address: string, amount: number, network: Network}) => requestSolanaAirdrop(data.network, data.address, data.amount)
     })
 }
