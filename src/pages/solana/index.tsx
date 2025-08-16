@@ -248,11 +248,11 @@ const SolanaFaucetDApp = () => {
               </div>
 
               {/* Network Selection */}
-              <div className="mb-6">
+              <div className="mb-10">
                 <label className="block text-sm font-semibold text-gray-300 mb-3">
                   Select Network
                 </label>
-                <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-2">
+                <div className="grid sm:grid-cols-2 grid-cols-1 gap-4">
                   {networks.map((network) => (
                     <button
                       key={network.id}
@@ -278,7 +278,7 @@ const SolanaFaucetDApp = () => {
               </div>
 
               {/* Amount Selection */}
-              <div className="mb-6">
+              <div className="mb-10">
                 <label className="block text-sm font-semibold text-gray-300 mb-3">
                   Select Amount
                 </label>
@@ -313,7 +313,7 @@ const SolanaFaucetDApp = () => {
               </div>
 
               {/* Wallet Address Input */}
-              <div className="mb-6">
+              <div className="mb-10">
                 <label className="block text-sm font-semibold text-gray-300 mb-3">
                   Wallet Address
                 </label>
@@ -342,7 +342,7 @@ const SolanaFaucetDApp = () => {
               </div>
 
               {/* Request Summary */}
-              <div className="bg-gray-900/50 rounded-xl p-4 border border-gray-600/50 mb-6">
+              <div className="bg-gray-900/50 rounded-xl p-4 border border-gray-600/50 mb-10">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 bg-gradient-to-r ${currentNetwork?.color} rounded-lg flex items-center justify-center`}>
