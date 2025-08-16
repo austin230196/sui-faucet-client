@@ -205,7 +205,7 @@ const SolanaFaucetDApp = () => {
               <div className={`w-10 h-10 ${selectedNetwork.color} bg-gradient-to-r rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/25`}>
                 <Droplets className="w-6 h-6 text-white" />
               </div>
-              <div>
+              <div className='sm:flex flex-col hidden'>
                 <h1 className="text-xl font-bold text-white">Solana Faucet</h1>
                 <p className="text-xs text-gray-400">Testnet & Devnet Tokens</p>
               </div>
@@ -224,7 +224,7 @@ const SolanaFaucetDApp = () => {
               <div className="w-px h-6 bg-gray-700"></div>
               <div className="flex items-center gap-2 text-sm">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-gray-300">{selectedNetwork.name.slice(0, 1).toUpperCase() + selectedNetwork.name.slice(1)} Active</span>
+                <span className="text-gray-300">Active</span>
               </div>
             </div>
           </div>
@@ -252,7 +252,7 @@ const SolanaFaucetDApp = () => {
                 <label className="block text-sm font-semibold text-gray-300 mb-3">
                   Select Network
                 </label>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-2">
                   {networks.map((network) => (
                     <button
                       key={network.id}
