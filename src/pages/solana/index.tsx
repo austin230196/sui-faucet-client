@@ -500,7 +500,7 @@ const SolanaFaucetDApp = () => {
                 Recent Activity
               </h3>
               <div className="space-y-3">
-                {recentRequests.length > 0 ? recentRequests.map((tx) => {
+                {recentRequests?.length > 0 ? recentRequests?.map((tx) => {
                   const network = networks.find(n => n.id === tx.network);
                   const copyId = `addr-${tx.id || tx.address}`;
                   return (
@@ -508,7 +508,7 @@ const SolanaFaucetDApp = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <span className="font-mono text-sm text-gray-300">
-                            {tx.address.substring(0, 8)}...{tx.address.substring(tx.address.length - 6)}
+                            {tx.address.substring(0, 8)}...{tx.address.substring(tx.address?.length - 6)}
                           </span>
                           <button
                             onClick={() => copyToClipboard(tx.address, copyId)}

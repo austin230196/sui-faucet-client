@@ -332,7 +332,7 @@ const SuiFaucetDApp = () => {
               </h3>
               <div className="space-y-3">
                 {
-                  recentRequests.length > 0 ? recentRequests.map((tx, index) => (
+                  recentRequests?.length > 0 ? recentRequests?.map((tx, index) => (
                     <div key={index} className="flex items-center justify-between p-3 bg-slate-900/30 rounded-lg border border-slate-700/30">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
